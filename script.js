@@ -1,0 +1,15 @@
+let title = "My Project";
+console.log(typeof title);
+let screens = "Простые, Сложные, Интерактивные";
+console.log(screens.length);
+console.log(screens.toLowerCase());
+console.log(screens.split(", "));
+let screenPrice = 7;
+console.log('Стоимость верстки экранов ' + screenPrice + ' долларов');
+let rollback = 25;
+let fullPrice = 5000;
+console.log('Стоимость разработки сайта ' + fullPrice + ' долларов');
+console.log(fullPrice*=(rollback/=100));
+console.log(typeof fullPrice);
+let adaptive = true;
+console.log(typeof adaptive);
