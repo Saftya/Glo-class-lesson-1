@@ -11,15 +11,15 @@ let adaptive = true;
 prompt("Какой дополнительный тип услуги нужен?");
 let service1 = 'верстка одностраничника';
 prompt("Сколько будет стоить?");
-let servicePrice1 = 5000;
+let servicePrice1 = 5000.99;
 prompt("Какой дополнительный тип услуги нужен?");
 let service2 = 'верстка многостраничника';
 prompt("Сколько будет стоить?");
-let servicePrice2 = 10000;
+let servicePrice2 = 10000.78;
 
 let fullPrice = screenPrice + servicePrice1 + servicePrice2;
 
-let rollback = 5000;
+let rollback = fullPrice *0.1;
 let servicePercentPrice = fullPrice - rollback;
 
 console.log(Math.ceil(servicePercentPrice));
