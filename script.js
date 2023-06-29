@@ -19,21 +19,22 @@ let servicePrice2 = 10000;
 
 let fullPrice = screenPrice + servicePrice1 + servicePrice2;
 
-let rollback = 2000;
+let rollback = 5000;
 let servicePercentPrice = fullPrice - rollback;
 
 console.log(Math.ceil(servicePercentPrice));
-let servicePercentPrice = 0;
+
 
 switch (true) { 
-case fullPrice > 30000 :
-    console.log(“Даем скидку в 10%”); 
+case fullPrice > 30000:
+    console.log('Даем скидку в 10%'); 
         break
-case fullPrice > 15000 && fullPrice < 30000 :
-    console.log(“Даем скидку в 5%”);
+case fullPrice > 15000 && fullPrice <= 30000:
+    console.log('Даем скидку в 5%');
         break
-case fullPrice < 15000 && fullPrice > 0 :
+case fullPrice <= 15000 && fullPrice >= 0:
+    console.log('Скидка не предусмотрена');
         break
-default: 
-console.log(“Что то пошло не так”);
+case fullPrice < 0: 
+console.log('Что то пошло не так');
 }
