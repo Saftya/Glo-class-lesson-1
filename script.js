@@ -29,35 +29,33 @@ const getAllServicePrices = function (){
     let sum = 0
     for (let i = 0; i < 2; i++){
         let price = 0
+
         if (i === 0) {
             service1 = prompt("Какой дополнительный тип услуги нужен?")
         } else if (i === 1) {
             service2  = prompt("Какой дополнительный тип услуги нужен?")
         }
-        while(!isNumber(price)){
-    price = prompt("Сколько это будет стоить?")
-    }
+        do {
+            price = prompt("Сколько это будет стоить?")
+        }
+        while(!isNumber(price))
+
     sum += +price 
 }
 return sum
 }
 
 
-function getFullPrice(){
-return screenPrice + allServicePrices
-}
-
-const getTitle = function() {
-    return title.trim()[0].toUpperCase() + title.trim().substr(1).toLowerCase()
+const getFullPrice = function() {
+return +screenPrice + allServicePrices
 }
 
 const getServicePercentPrices = function() {
 return fullPrice - (fullPrice * (rollback/100))
 }
 
-
-const showTypeOf = function(variable) {
-console.log(variable, typeof variable);
+const getTitle = function() {
+    return title.trim()[0].toUpperCase() + title.trim().substr(1).toLowerCase()
 }
 
 
@@ -90,4 +88,6 @@ console.log(typeof screenPrice);
 console.log(typeof adaptive);
 
 console.log(servicePercentPrice);
-console.log("Стоимость верстки " + screenPrice + " тенге" и "Стоимость разработки сайта " + fullPrice + " тенге");
+
+console.log("Стоимость верстки " + screenPrice + " тенге");
+console.log("Стоимость разработки сайта " + fullPrice + " тенге");
