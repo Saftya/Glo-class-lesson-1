@@ -76,13 +76,13 @@ else {
 logger: function(){
 console.log(appData.fullPrice);
 console.log(appData.servicePercentPrice);
+for (let key in appData) {
+    console.log ("Ключ: " + key + " " + "Значение: " + appData[key]);
+}
     }
-
 }
 
 appData.start();
 
-for (let key in appData) {
-    console.log ("Ключ: " + key + " " + "Значение: " + appData[key]);
-}
+
 
