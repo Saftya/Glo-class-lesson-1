@@ -28,7 +28,7 @@ asking: function(){
     appData.screens = prompt("Какие типы экранов нужно разработать?", "Простые, Cложные")
     do {
         appData.screenPrice = prompt("Сколько будет стоить данная работа?")
-    } while(!isNumber(appData.screenPrice))  
+    } while(!appData.isNumber(appData.screenPrice))  
     appData.adaptive = confirm("Нужен ли адаптив на сайте?")
 },
 getAllServicePrices: function (){
@@ -44,7 +44,7 @@ getAllServicePrices: function (){
         do {
             price = prompt("Сколько это будет стоить?")
         }
-        while(!isNumber(price))
+        while(!appData.isNumber(price))
 
     sum += +price 
 }
@@ -82,7 +82,7 @@ console.log(appData.servicePercentPrice);
 
 appData.start();
 
-for (let key in appData.logger) {
-    console.log ("Ключ: " + key + " " + "Значение: " + appData.logger[key]);
+for (let key in appData) {
+    console.log ("Ключ: " + key + " " + "Значение: " + appData[key]);
 }
 
