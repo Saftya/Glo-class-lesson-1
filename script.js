@@ -23,9 +23,17 @@ isNumber: function(num){
     return !isNaN(parseFloat(num)) && isFinite(num)
 } ,
 asking: function(){
-    appData.title = prompt("Как называется ваш проект?", "Калькулятор верстки") 
+    do {
+        appData.title = prompt("Как называется ваш проект?") 
+    } while(!isNaN(appData.title))  
+
+// isNan у нас есть функция, она на число, соответственно, если не число - то строка
+    
     for (let i = 0; i < 2; i++) {
-        let name = prompt("Какие типы экранов нужно разработать?")
+        let name 
+        do {
+        name = prompt("Какие типы экранов нужно разработать?") 
+    } while(!isNaN(name)) 
         let price = 0
         do {
         price = prompt("Сколько будет стоить данная работа?")
