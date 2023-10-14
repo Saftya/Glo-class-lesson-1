@@ -27,7 +27,7 @@ asking: function(){
         appData.title = prompt("Как называется ваш проект?") 
     } while(!isNaN(appData.title))  
 
-// isNan у нас есть функция, она на число, соответственно, если не число - то строка
+
     
     for (let i = 0; i < 2; i++) {
         let name 
@@ -43,8 +43,11 @@ asking: function(){
     
 
         for (let i = 0; i < 2; i++){
-        let name = prompt("Какой дополнительный тип услуги нужен?")
-
+            let name
+        
+do {
+        name = prompt("Какой дополнительный тип услуги нужен?") 
+    } while(!isNaN(name))
         let price = 0
 
         do {
@@ -58,15 +61,22 @@ asking: function(){
 },
 addPrices: function () {
 
-for (let screen of appData.screens) {
-        appData.screenPrice += +screen.price
-    }
+const result = appData.screens.reduce(function(sum, item){
+    console.log('sum: ', sum, 'item: ', item);
+    return sum + +item.price
+}, 20000)
+console.log(result);
+
+    // for (let screen of appData.screens) {
+        
+    //     appData.screenPrice += +screen.price
+    // }
+
 
 for (let key in appData.services){
     appData.allServicePrices +=appData.services[key]
 }
 },
-
 getFullPrice: function() {
 appData.fullPrice = +appData.screenPrice + appData.allServicePrices
 },
