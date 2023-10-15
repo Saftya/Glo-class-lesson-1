@@ -44,7 +44,6 @@ asking: function(){
 
         for (let i = 0; i < 2; i++){
             let name
-        
 do {
         name = prompt("Какой дополнительный тип услуги нужен?") 
     } while(!isNaN(name))
