@@ -26,3 +26,5 @@ console.log (totalInputs);
 eachInputs()
 console.log (screen);
 
+
+
