@@ -112,7 +112,6 @@ otherItemsNumber.forEach(function(item){
     appData.servicesNumber[label.textContent] = +input.value
     }
 })
-
 },
 
 addScreenBlock: function(){
