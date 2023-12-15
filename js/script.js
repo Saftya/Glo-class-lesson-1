@@ -24,76 +24,74 @@ title: '',
 screens: [], 
 screenPrice: 0, 
 adaptive: true,
-rollback: inputRangeValue.textContent,
+rollback: inputRange.value, 
 servicePricesPercent: 0,
 servicePricesNumber: 0,
+screenCount: 0,
 fullPrice: 0,
 servicePercentPrice: 0,
 servicesPercent: {}, 
 servicesNumber: {}, 
+isError: false,
 init: function(){
     appData.addTitle()
-
     startBtn.addEventListener('click', appData.start)
     buttonPlus.addEventListener('click', appData.addScreenBlock)
-// task2
-    inputRange.addEventListener('change', function() {
-inputRangeValue.textContent = inputRange.value + "%"
-})
+    inputRange.addEventListener('input', appData.trigger) 
+},
+trigger: function() {
+    inputRangeValue.textContent = inputRange.value + "%"
 },
 addTitle: function(){
 document.title = title.textContent
 },
+
 start: function(){
     appData.addScreens()
     appData.addServices()
     appData.addPrices()
 
-    // appData.getServicePercentPrices()
-    // appData.logger()
-
     appData.showResult()
 },
 showResult: function(){
 total.value = appData.screenPrice
+totalCount.value = appData.screenCount
 totalCountOther.value = appData.servicePricesPercent + appData.servicePricesNumber
 fullTotalCount.value = appData.fullPrice
+totalCountRollback.value = appData.servicePercentPrice
 },
 
 addScreens: function() {
     screens = document.querySelectorAll('.screen')
-    
+
     screens.forEach(function(screen,index){
         const select = screen.querySelector('select')
         const input = screen.querySelector('input')
         const selectName = select.options[select.selectedIndex].textContent
-        select.className += ' required';
-        input.className += ' required';
-        console.log(select);
-        console.log(input);
-        let isValid = true;
-        
 
-        for(let i = 0; i < select.length; i++){
-            if (select.value === "" || input.value === ""){
-        isValid = false;
+        screen.length = 1;
+        screens = document.querySelectorAll('.screen')
+        for (let i = 0; i < screen.length; i++) {
+            
+            if (select.value.trim().length === 0 || input.value.trim().length === 0) {
+                appData.addScreens();
+                appData.isError = true;
+
         }
 else {
-    startBtn.disabled = !isValid;
-        }
-    }
-
+appData.isError = false;
+screens = document.querySelectorAll('.screen');
 appData.screens.push({
             id: index,
             name: selectName,
             price: +select.value * +input.value,
             count: input.value,
         })
-    })
+    }
+    }
+})
 
-    console.log(appData.screens);
 },
-
 addServices: function(){
 otherItemsPercent.forEach(function(item){
     const check = item.querySelector('input[type=checkbox]')
@@ -118,9 +116,16 @@ otherItemsNumber.forEach(function(item){
 },
 
 addScreenBlock: function(){
-    // screens.length = 1
+    screens = document.querySelectorAll('.screen')
+    document.querySelector('select').value = ""
+    document.querySelector('input').value = ""
     const cloneScreen = screens[0].cloneNode(true)
-screens[screens.length - 1].after(cloneScreen)
+    screens[screens.length - 1].after(cloneScreen)
+    total.value = ""
+    totalCount.value = ""
+    totalCountOther.value = ""
+    fullTotalCount.value = ""
+    totalCountRollback.value = ""
 },
 
 addPrices: function () {
@@ -128,38 +133,30 @@ addPrices: function () {
         appData.screenPrice += +screen.price
     }
 
-for (let key in appData.servicesNumber){
+    for (let key in appData.servicesNumber){
     appData.servicePricesNumber += appData.servicesNumber[key]
     }
 
-for (let key in appData.servicesPercent){
-    appData.servicePricesPercent += appData.screenPrice * (appData.servicesPercent[key] / 100)
+    for (let key in appData.servicesPercent){
+    appData.servicePricesPercent += appData.screenPrice * (appData.servicesPercent[key] / 100)}
 
+
+    for (let screen of appData.screens) {
+    appData.screenCount += +screen.count
     }
-
-// task4 посчитать общее количество экранов и вывести на страницу итоговое значение в поле с подписью "Количество экранов"
-
+    
+appData.rollback = inputRange.value 
 appData.fullPrice = +appData.screenPrice + appData.servicePricesNumber + appData.servicePricesPercent
 
-// task 3 
-// function() {
-//     appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback/100))
-// }
-
+appData.servicePercentPrice = +appData.fullPrice - (+appData.fullPrice * +appData.rollback/100)
+console.log(appData.rollback);
+console.log(appData.servicePercentPrice);
 },
 
-
-logger: function(){
-console.log(appData.fullPrice);
-console.log(appData.servicePercentPrice);
-console.log(appData.screens);
-    }
 }
 
-console.log(appData);
-
-
 appData.init();
+
 
 
 
